@@ -679,7 +679,7 @@
     if (currentScore == null) { alert("スコアがありません。"); return; } // 安全策
     // Firestoreへ追加
     try {
-      await addDoc(collection(db, "scores"), {
+      await addDoc(collection(db, "scores2"), {
         name,
         score: currentScore,
         createdAt: serverTimestamp()
@@ -697,7 +697,7 @@
   async function loadTop5() {
     leaderboard.innerHTML = '<li>ランキング読み込み中...</li>'; // 読み込み中の表示
     try {
-      const ref = collection(db, "scores");
+      const ref = collection(db, "scores2");
       const q = query(ref, orderBy("score", "desc"), orderBy("createdAt", "asc"), limit(5));
       const snap = await getDocs(q);
       const rows = snap.docs.map((d, i) => {
@@ -728,5 +728,6 @@
 </script>
  </body>
 </html>
+
 
 
